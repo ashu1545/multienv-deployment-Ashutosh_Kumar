@@ -94,70 +94,6 @@ multiEnv/
 
 ---
 
-# Docker Configuration
-
-## Frontend Dockerfile
-
-# Environment Variables
-
-## Development Environment
-
-File: `backend/dev/.env`
-
-```env
-MONGO_URI=mongodb://mongo-dev:27017/devdb
-```
-
-## Production Environment
-
-File: `backend/prod/.env`
-
-```env
-MONGO_URI=mongodb://mongo-prod:27017/proddb
-```
-
----
-
-# Docker Compose Configuration
-
-```yaml
-services:
-
-  mongo-dev:
-    image: mongo:7
-
-  mongo-prod:
-    image: mongo:7
-
-  backend-dev:
-    build: ./backend/dev
-    ports:
-      - "3001:3001"
-    env_file:
-      - ./backend/dev/.env
-    depends_on:
-      - mongo-dev
-
-  backend-prod:
-    build: ./backend/prod
-    ports:
-      - "3002:3002"
-    env_file:
-      - ./backend/prod/.env
-    depends_on:
-      - mongo-prod
-
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend-dev
-      - backend-prod
-```
-
----
-
 # Prerequisites
 
 Before running the application, install:
@@ -176,18 +112,7 @@ docker compose version
 
 ---
 
-# Deployment Steps
-
-## Step 1: Clone Repository
-
-```bash
-git clone <repository-url>
-cd multienv-deployment-Ashutosh_Kumar
-```
-
----
-
-## Step 2: Build Docker Images
+## Step 1: Build Docker Images
 
 ```bash
 docker compose build
@@ -195,7 +120,7 @@ docker compose build
 
 ---
 
-## Step 3: Start All Containers
+## Step 2: Start All Containers
 
 ```bash
 docker compose up -d
@@ -203,7 +128,7 @@ docker compose up -d
 
 ---
 
-## Step 4: Verify Running Containers
+## Step 3: Verify Running Containers
 
 ```bash
 docker ps
